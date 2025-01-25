@@ -1,0 +1,313 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    user-select: none;
+}
+
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #14BDAC;
+    padding: 20px;
+    border-radius: 20px;
+    width: 650px;
+    height: 280px;
+}
+
+.title {
+    color: dimgray;
+    text-align: center;
+}
+
+.title span {
+    color: white;
+}
+
+.status {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6em;
+    text-align: center;
+    padding-top: 5px;
+    color: #333;
+}
+
+.status span {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.replay {
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: 1px;
+    color: whitesmoke;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-family: 'Press Start 2P', cursive;
+    padding: 10px 20px;
+}
+
+.replay:hover {
+    color: dimgrey;
+    transform: scale(1.05);
+}
+
+.replay:active {
+    color: dimgrey;
+    transform: scale(0.95);
+}
+
+.game {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 6px;
+    width: 150px;
+    height: 150px;
+    background: #0DA192;
+    margin: 10px auto 0;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.cell {
+    background-color: #14BDAC;
+    font-weight: bold;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+    padding-bottom: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.winning-line-0-1-2,
+.winning-line-3-4-5,
+.winning-line-6-7-8,
+.winning-line-0-3-6,
+.winning-line-1-4-7,
+.winning-line-2-5-8,
+.winning-line-0-4-8,
+.winning-line-2-4-6
+{
+    position: relative;
+}
+
+.winning-line-0-1-2::before,
+.winning-line-3-4-5::before,
+.winning-line-6-7-8::before,
+.winning-line-0-3-6::before,
+.winning-line-1-4-7::before,
+.winning-line-2-5-8::before,
+.winning-line-0-4-8::before,
+.winning-line-2-4-6::before
+{
+    position: absolute;
+    content: "";
+    background-color: white;
+    border-radius: 10px;
+}
+
+.winning-line-0-1-2::before,
+.winning-line-3-4-5::before,
+.winning-line-6-7-8::before
+{
+    animation: drawHorizontalLine 0.5s ease-in-out;
+}
+
+.winning-line-0-3-6::before,
+.winning-line-1-4-7::before,
+.winning-line-2-5-8::before
+{
+    animation: drawVerticalLine 0.5s ease-in-out;
+}
+
+.winning-line-0-4-8::before,
+.winning-line-2-4-6::before
+{
+    animation: drawVerticalLine 0.5s ease-in-out;
+}
+
+.winning-line-0-1-2::before {
+    height: 4px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 18%;
+}
+
+.winning-line-3-4-5::before {
+    height: 4px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 50%;
+}
+
+.winning-line-6-7-8::before {
+    height: 4px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+}
+
+.winning-line-0-3-6::before {
+    height: 100%;
+    width: 4px;
+    left: 15%;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.winning-line-1-4-7::before {
+    height: 100%;
+    width: 4px;
+    left: 50%;
+    bottom: 0;
+    top: 0;
+}
+
+.winning-line-2-5-8::before {
+    height: 100%;
+    width: 4px;
+    right: 15%;
+    bottom: 0;
+    top: 0;
+}
+
+@keyframes drawHorizontalLine {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes drawVerticalLine {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 100%;
+    }
+}
+
+@keyframes drawDiagonalLine {
+    0% {
+        width: 0;
+        height: 4px;
+        left: 50%;
+        top: 50%;
+        rotate: 45deg;
+    }
+    100% {
+        height: 4px;
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: 50%;
+        rotate: 45deg;
+    }
+}
+
+.winning-line-0-4-8::before {
+    animation: drawDiagonalLine 0.5s ease-in-out forwards;
+}
+
+@keyframes drawDiagonalLineSecond {
+    0% {
+        width: 0;
+        height: 4px;
+        left: 50%;
+        top: 50%;
+        rotate: -45deg;
+    }
+    100% {
+        height: 4px;
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: 50%;
+        rotate: -45deg;
+    }
+}
+
+.winning-line-2-4-6::before {
+    animation: drawDiagonalLineSecond 0.5s ease-in-out forwards;
+}
+
+.win-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    color: dimgrey;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+    z-index: 1000;
+}
+
+.win-message span:first-child {
+    font-size: 80px;
+    margin-bottom: 5px;
+    animation: slideUp 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.cell-text {
+    opacity: 0;  /* Le texte commence invisible */
+    animation: drawText 0.5s forwards; /* Appliquer l'animation au texte */
+}
+
+@keyframes drawText {
+    0% {
+        width: 0;
+        opacity: 1;
+    }
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
